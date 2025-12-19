@@ -60,10 +60,6 @@ public class SuduxuInput
         }
     }
 
-    // ------------------------
-    // Input polling (unchanged)
-    // ------------------------
-
     public bool GetButtonDown(ButtonInputType type)
     {
         return SuduxuRaw.get_button_in_state(Id, type, ButtonInputState.Down);

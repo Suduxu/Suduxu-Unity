@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Newtonsoft.Json;
-using UnityEngine;
 
 public class Suduxu
 {
@@ -34,7 +33,7 @@ public class Suduxu
 
     public void Launch()
     {
-        if (SuduxuRaw.is_running())
+        if (IsRunning())
             throw new SuduxuException("Suduxu is already running.");
 
         SuduxuRaw.serverThread = new Thread(() =>
@@ -50,7 +49,7 @@ public class Suduxu
 
     public void Stop()
     {
-        if (!SuduxuRaw.is_running())
+        if (!IsRunning())
             throw new SuduxuException("Suduxu is not running.");
 
         SuduxuRaw.stop_suduxu();
@@ -72,11 +71,6 @@ public class Suduxu
         Input.For(id);
         Client.For(id);
     }
-
-    // ------------------------
-    // Client discovery
-    // ------------------------
-
     public List<SuduxuDevice> FindAllClients()
     {
         return ReadJson<List<SuduxuDevice>>(SuduxuRaw.find_all_clients);
@@ -99,10 +93,6 @@ public class Suduxu
     {
         SuduxuRaw.disconnect_client(id);
     }
-
-    // ------------------------
-    // Native event handling
-    // ------------------------
 
     private void OnEvent(IntPtr ptr)
     {

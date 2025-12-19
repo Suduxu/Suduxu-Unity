@@ -1,7 +1,6 @@
-using Newtonsoft.Json;
 using UnityEngine;
 
-public class SensorData
+public struct SensorData
 {
     public ushort Id { get; private set; }
     public bool Mocked { get; private set; }
@@ -54,7 +53,7 @@ public class SensorData
 
 }
 
-public class Vector3SensorData
+public struct Vector3SensorData
 {
     public Vector3 Accelerometer { get; private set; }
     public Vector3 Gyroscope { get; private set; }
