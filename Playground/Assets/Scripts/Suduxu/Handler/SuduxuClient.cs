@@ -24,7 +24,7 @@ public class SuduxuClient
         return this;
     }
 
-    private void Send(Payload payload)
+    private void _Send(Payload payload)
     {
         IntPtr ptr = IntPtr.Zero;
 
@@ -47,7 +47,7 @@ public class SuduxuClient
 
     public void Vibrate(long duration, VibrationStrength strength, VibrationType type)
     {
-        Send(new Payload(
+        _Send(new Payload(
             "Vibrate",
             JToken.FromObject(new VibrationData(duration, strength, type))
         ));
@@ -55,7 +55,7 @@ public class SuduxuClient
 
     public void PlaySound(string name)
     {
-        Send(new Payload(
+        _Send(new Payload(
             "PlaySound",
             JToken.FromObject(new PlaySound(name))
         ));
@@ -63,7 +63,7 @@ public class SuduxuClient
 
     public void SendSensorData(bool enabled)
     {
-        Send(new Payload(
+        _Send(new Payload(
             "SendSensorData",
             JToken.FromObject(new SendSensorData(enabled))
         ));

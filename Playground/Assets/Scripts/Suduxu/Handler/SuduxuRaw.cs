@@ -68,8 +68,4 @@ public class SuduxuRaw
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void EventCallback(IntPtr ptr);
-
-    // ----------------------------------- Event ------------------------------------
-    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void log_test();
 }

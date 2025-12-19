@@ -24,7 +24,7 @@ public class Suduxu
 
     public void RegisterCallbacks()
     {
-        _eventCallback = OnEvent;
+        _eventCallback = _OnEvent;
         _sensorCallback = Input.OnSensorEvent;
 
         SuduxuRaw.register_event_callback(_eventCallback);
@@ -73,13 +73,13 @@ public class Suduxu
     }
     public List<SuduxuDevice> FindAllClients()
     {
-        return ReadJson<List<SuduxuDevice>>(SuduxuRaw.find_all_clients);
+        return _ReadJson<List<SuduxuDevice>>(SuduxuRaw.find_all_clients);
     }
 
     public SuduxuDevice FindClientById(ushort id)
     {
         SuduxuDevice device =
-            ReadJson<SuduxuDevice>(() => SuduxuRaw.find_client_by_id(id));
+            _ReadJson<SuduxuDevice>(() => SuduxuRaw.find_client_by_id(id));
 
         return device;
     }
@@ -94,7 +94,7 @@ public class Suduxu
         SuduxuRaw.disconnect_client(id);
     }
 
-    private void OnEvent(IntPtr ptr)
+    private void _OnEvent(IntPtr ptr)
     {
         string json = Marshal.PtrToStringAnsi(ptr);
         SuduxuRaw.free(ptr);
@@ -115,7 +115,7 @@ public class Suduxu
         }
     }
 
-    private T ReadJson<T>(Func<IntPtr> nativeCall)
+    private T _ReadJson<T>(Func<IntPtr> nativeCall)
     {
         IntPtr ptr = nativeCall();
         try
