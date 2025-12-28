@@ -68,4 +68,12 @@ public class SuduxuClient
             JToken.FromObject(new SendSensorData(enabled))
         ));
     }
+
+    public void SetFrameRate(ushort frameRate)
+    {
+        _Send(new Payload(
+            "SetFrameRate",
+            JToken.FromObject(new FrameRate(frameRate))
+        ));
+    }
 }
