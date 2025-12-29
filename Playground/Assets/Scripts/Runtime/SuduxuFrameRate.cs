@@ -42,6 +42,11 @@ public class SuduxuFrameRate : MonoBehaviour
             suduxu.Client.SendSensorData(true);
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            suduxu.Client.Log(LogLevel.Warn, "Test Log");
+        }
+
         if (elapsed > 1)
         {
             Debug.Log($"Rounds: {frameCount}");

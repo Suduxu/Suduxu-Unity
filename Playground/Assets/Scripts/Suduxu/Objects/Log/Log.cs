@@ -11,7 +11,7 @@ public class Log
         string color = level switch
         {
             LogLevel.Error => "red",
-            LogLevel.Warning => "yellow",
+            LogLevel.Warn => "yellow",
             LogLevel.Info => "white",
             LogLevel.Debug => "grey",
             _ => "white"

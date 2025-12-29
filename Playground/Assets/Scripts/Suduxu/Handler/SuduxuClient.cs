@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 public class SuduxuClient
 {
@@ -75,5 +76,17 @@ public class SuduxuClient
             "SetFrameRate",
             JToken.FromObject(new FrameRate(frameRate))
         ));
+    }
+
+    public void Log(LogLevel level, string message, string title = null)
+    {
+        var payload = new Payload(
+            "Log",
+            JToken.FromObject(new LogObject(level, message, title))
+        );
+
+        Debug.Log(payload);
+
+        _Send(payload);
     }
 }
