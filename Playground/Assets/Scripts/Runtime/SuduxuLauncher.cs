@@ -50,7 +50,7 @@ public class SuduxuLauncher : MonoBehaviour
             case LogLevel.Info:
                 Debug.Log(log);
                 break;
-            case LogLevel.Warning:
+            case LogLevel.Warn:
                 Debug.LogWarning(log);
                 break;
             case LogLevel.Error:
