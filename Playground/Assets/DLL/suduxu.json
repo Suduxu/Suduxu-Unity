@@ -19,7 +19,7 @@
     "log_to_console": true
   },
   "security": {
-    "use_password": false,
+    "use_password": true,
     "password": null
   },
   "file_sharing": {

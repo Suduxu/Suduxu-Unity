@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class SuduxuFrameRate : MonoBehaviour
@@ -13,7 +14,7 @@ public class SuduxuFrameRate : MonoBehaviour
     private void Start()
     {
         suduxu.Launch();
-        suduxu.RegisterCallbacks();
+        suduxu.Init();
 
         suduxu.Log.OnLog += (log) =>
         {
@@ -34,12 +35,17 @@ public class SuduxuFrameRate : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            suduxu.Client.SetFrameRate(5);
+            Debug.Log(JsonConvert.SerializeObject(suduxu.Addresses));
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             suduxu.Client.SendSensorData(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(suduxu.Password);
         }
 
         if (Input.GetKeyDown(KeyCode.L))
