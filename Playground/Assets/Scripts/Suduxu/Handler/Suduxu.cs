@@ -1,8 +1,9 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Newtonsoft.Json;
 
 public class Suduxu
 {
@@ -14,6 +15,39 @@ public class Suduxu
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
 
+    JsonSerializerSettings settings = new JsonSerializerSettings
+    {
+        ContractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new SnakeCaseNamingStrategy()
+        },
+        Converters =
+        {
+            new Newtonsoft.Json.Converters.StringEnumConverter()
+        },
+        NullValueHandling = NullValueHandling.Include,
+        MissingMemberHandling = MissingMemberHandling.Error,
+        DefaultValueHandling = DefaultValueHandling.Populate
+    };
+
+    private SuduxuConfig _config;
+
+    public SuduxuConfig Config {
+        get
+        {
+            if (_config == null)
+            {
+                _config = GetConfig();
+            }
+
+            return _config;
+        }
+    }
+
+    public AddressObject Addresses => GetAddresses();
+
+    public uint? Password => Config.security.password;
+
     public Suduxu(ushort defaultClientId)
     {
         Input = new SuduxuInput(defaultClientId);
@@ -22,7 +56,22 @@ public class Suduxu
         Log = new SuduxuLog();
     }
 
-    public void RegisterCallbacks()
+    public void Init()
+    {
+        RegisterCallbacks();
+    }
+
+    private SuduxuConfig GetConfig()
+    {
+        return _ReadJson<SuduxuConfig>(SuduxuRaw.config, settings);
+    }
+
+    private AddressObject GetAddresses()
+    {
+        return _ReadJson<AddressObject>(SuduxuRaw.addresses);
+    }
+
+    private void RegisterCallbacks()
     {
         _eventCallback = _OnEvent;
         _sensorCallback = Input.OnSensorEvent;
@@ -115,13 +164,20 @@ public class Suduxu
         }
     }
 
-    private T _ReadJson<T>(Func<IntPtr> nativeCall)
+    private T _ReadJson<T>(Func<IntPtr> nativeCall, JsonSerializerSettings settings = null)
     {
         IntPtr ptr = nativeCall();
         try
         {
             string json = Marshal.PtrToStringAnsi(ptr);
-            return JsonConvert.DeserializeObject<T>(json);
+            if (settings == null)
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject<T>(json, settings);
+            }
         }
         finally
         {

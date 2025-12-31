@@ -7,9 +7,9 @@ public class SuduxuLauncher : MonoBehaviour
 
     private void Start()
     {
-        // Launch Suduxu server
+        // Init Suduxu server
         suduxu.Launch();
-        suduxu.RegisterCallbacks();
+        suduxu.Init();
 
         // ===== Subscribe to events =====
         suduxu.Log.OnLog += HandleLog;

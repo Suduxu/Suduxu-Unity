@@ -49,6 +49,13 @@ public class SuduxuRaw
     public static extern bool tick(float delta);
     // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
+    // ----------------------------------- Config -----------------------------------
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr config();
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr addresses();
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
     // ----------------------------------- Utils ------------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool free(IntPtr data);
