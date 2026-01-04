@@ -85,8 +85,6 @@ public class SuduxuClient
             JToken.FromObject(new LogObject(level, message, title))
         );
 
-        Debug.Log(payload);
-
         _Send(payload);
     }
 }

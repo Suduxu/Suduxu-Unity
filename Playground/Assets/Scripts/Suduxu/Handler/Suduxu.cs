@@ -4,13 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
+using UnityEngine;
 
-public class Suduxu
+[Injectable]
+public class Suduxu : MonoBehaviour
 {
-    public SuduxuInput Input { get; }
-    public SuduxuClient Client { get; }
-    public SuduxuServer Server { get; }
-    public SuduxuLog Log { get; }
+    public SuduxuInput Input { get; private set; }
+    public SuduxuClient Client { get; private set; }
+    public SuduxuServer Server { get; private set; }
+    public SuduxuLog Log { get; private set; }
 
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
@@ -48,17 +50,12 @@ public class Suduxu
 
     public uint? Password => Config.security.password;
 
-    public Suduxu(ushort defaultClientId)
+    private void Awake()
     {
-        Input = new SuduxuInput(defaultClientId);
-        Client = new SuduxuClient(defaultClientId);
+        Input = new SuduxuInput(0); // Default Client ID
+        Client = new SuduxuClient(0); // Default Client ID
         Server = new SuduxuServer();
         Log = new SuduxuLog();
-    }
-
-    public void Init()
-    {
-        RegisterCallbacks();
     }
 
     private SuduxuConfig GetConfig()
@@ -94,6 +91,8 @@ public class Suduxu
         };
 
         SuduxuRaw.serverThread.Start();
+
+        RegisterCallbacks();
     }
 
     public void Stop()
@@ -152,15 +151,15 @@ public class Suduxu
 
         if (evt.type == "Log")
         {
-            Log.Handle(evt);
+            MainThreadDispatcher.Enqueue(() => Log.Handle(evt));
         }
         else if (evt.type == "Udp")
         {
-            Input.HandleUdp(evt);
+            MainThreadDispatcher.Enqueue(() => Input.HandleUdp(evt));
         }
         else if (evt.type == "Tcp")
         {
-            Server.HandleTcp(evt);
+            MainThreadDispatcher.Enqueue(() => Server.HandleTcp(evt));
         }
     }
 
