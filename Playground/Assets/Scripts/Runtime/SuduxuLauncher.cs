@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class SuduxuLauncher : MonoBehaviour
 {
-    private Suduxu suduxu = new Suduxu(1);
+    private Suduxu suduxu = new Suduxu();
     private bool isSending = false;
 
     private void Start()
     {
         // Init Suduxu server
         suduxu.Launch();
-        suduxu.Init();
 
         // ===== Subscribe to events =====
         suduxu.Log.OnLog += HandleLog;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SuduxuFrameRate : MonoBehaviour
 {
-    private Suduxu suduxu = new(1);
+    private Suduxu suduxu = new();
 
     private int frameCount = 0;
     private float elapsed = 0;
@@ -14,7 +14,6 @@ public class SuduxuFrameRate : MonoBehaviour
     private void Start()
     {
         suduxu.Launch();
-        suduxu.Init();
 
         suduxu.Log.OnLog += (log) =>
         {
