@@ -8,16 +8,13 @@ public class SuduxuComponent : MonoBehaviour
 
     [Injected] private Suduxu suduxu;
 
-    private void Awake()
+    private void Start()
     {
         if (launchOnStart && !suduxu.IsRunning())
         {
             suduxu.Launch();
         }
-    }
 
-    private void Start()
-    {
         suduxu.Log.OnLog += log =>
         {
             Debug.Log(log);
