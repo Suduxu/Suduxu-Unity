@@ -9,6 +9,10 @@ using UnityEngine;
 [Injectable]
 public class Suduxu : MonoBehaviour
 {
+    [SerializeField]
+    private ushort defaultId = 0;
+
+    public ushort DefaultId => defaultId;
     public SuduxuInput Input { get; private set; }
     public SuduxuClient Client { get; private set; }
     public SuduxuServer Server { get; private set; }
@@ -52,8 +56,8 @@ public class Suduxu : MonoBehaviour
 
     private void Awake()
     {
-        Input = new SuduxuInput(0); // Default Client ID
-        Client = new SuduxuClient(0); // Default Client ID
+        Input = new SuduxuInput(defaultId);
+        Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
         Log = new SuduxuLog();
     }
