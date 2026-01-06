@@ -6,7 +6,7 @@ public class SuduxuInput
     public ushort Id { get; private set; }
 
     // Sensor
-    public delegate void SensorDataEvent(ref SensorDataRaw data);
+    public delegate void SensorDataEvent(ushort id, ref SensorDataRaw data);
     public event SensorDataEvent OnSensorData;
 
     // UDP
@@ -28,9 +28,9 @@ public class SuduxuInput
 
     public void OnSensorEvent(ref SensorDataRaw data)
     {
-        if (data.id == Id)
+        if (data.id == Id || Id == 0)
         {
-            OnSensorData?.Invoke(ref data);
+            OnSensorData?.Invoke(data.id, ref data);
         }
     }
 
