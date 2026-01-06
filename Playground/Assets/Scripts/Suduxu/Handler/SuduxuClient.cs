@@ -2,10 +2,12 @@ using System;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 public class SuduxuClient
 {
+    public event Action<ushort, Battery> OnBatteryChange;
+    public event Action<ushort, Network> OnNetworkChange; 
+
     public ushort Id { get; private set; }
 
     public SuduxuClient(ushort id)
@@ -86,5 +88,24 @@ public class SuduxuClient
         );
 
         _Send(payload);
+    }
+
+    public void HandleState(EventObject evt)
+    {
+        switch (evt.kind)
+        {
+            case 0:
+                OnBatteryChange?.Invoke(
+                        evt.value["id"]!.ToObject<ushort>(),
+                        evt.value["battery"]!.ToObject<Battery>()
+                    );
+                break;
+            case 1:
+                OnNetworkChange?.Invoke(
+                        evt.value["id"]!.ToObject<ushort>(),
+                        evt.value["network"]!.ToObject<Network>()
+                    );
+                break;
+        }
     }
 }
