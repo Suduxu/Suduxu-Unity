@@ -14,5 +14,12 @@ public class SuduxuEventTest : MonoBehaviour
 
             Instantiate(prefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         };
+
+        
+        suduxu.Client.OnBatteryChange += (id, battery) =>
+        {
+            Debug.Log(
+                $"Client with {id} has {battery.level}% and is {(battery.chargingStatus != ChargingStatus.Charging ? "not" : "")} charging");
+        };
     }
 }

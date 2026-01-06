@@ -165,6 +165,10 @@ public class Suduxu : MonoBehaviour
         {
             MainThreadDispatcher.Enqueue(() => Server.HandleTcp(evt));
         }
+        else if (evt.type == "State")
+        {
+            MainThreadDispatcher.Enqueue(() => Client.HandleState(evt));
+        }
     }
 
     private T _ReadJson<T>(Func<IntPtr> nativeCall, JsonSerializerSettings settings = null)
