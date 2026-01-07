@@ -30,13 +30,15 @@ public class SuduxuInput
 
     public SuduxuInput Broadcast()
     {
-        Id = 0;
+        Id = SuduxuId.BroadcastId;
         return this;
     }
 
-    public void OnSensorEvent(ref SensorDataRaw data)
+    public void OnSensorEvent(IntPtr sensorDataPtr)
     {
-        if (data.id == Id)
+        var data = Marshal.PtrToStructure<SensorDataRaw>(sensorDataPtr);
+
+        if (data.id == Id || Id == SuduxuId.BroadcastId)
         {
             MainThreadDispatcher.Enqueue(() => OnSensorData?.Invoke(data.id, data));
         }

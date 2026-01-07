@@ -169,6 +169,10 @@ public class Suduxu : MonoBehaviour
         {
             MainThreadDispatcher.Enqueue(() => Client.HandleState(evt));
         }
+        else if (evt.type == "Health")
+        {
+            MainThreadDispatcher.Enqueue(() => Client.HandleHealth(evt));
+        }
     }
 
     private T _ReadJson<T>(Func<IntPtr> nativeCall, JsonSerializerSettings settings = null)

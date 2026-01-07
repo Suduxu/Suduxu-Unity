@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SuduxuEventTest : MonoBehaviour
@@ -6,13 +7,15 @@ public class SuduxuEventTest : MonoBehaviour
 
     public GameObject prefab;
 
+    private GameObject instance;
+
     private void Start()
     {
         suduxu.Server.OnClientConnected += id =>
         {
             Debug.Log("Call");
 
-            Instantiate(prefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            instance = Instantiate(prefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         };
 
         
