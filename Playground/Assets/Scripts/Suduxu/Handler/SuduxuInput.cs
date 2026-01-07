@@ -1,13 +1,14 @@
 using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 public class SuduxuInput
 {
     public ushort Id { get; private set; }
 
     // Sensor
-    public delegate void SensorDataEvent(ref SensorDataRaw data);
+    public delegate void SensorDataEvent(ushort id, SensorDataRaw data);
     public event SensorDataEvent OnSensorData;
 
     // UDP
@@ -37,7 +38,7 @@ public class SuduxuInput
     {
         if (data.id == Id)
         {
-            OnSensorData?.Invoke(ref data);
+            MainThreadDispatcher.Enqueue(() => OnSensorData?.Invoke(data.id, data));
         }
     }
 

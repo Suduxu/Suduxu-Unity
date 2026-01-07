@@ -36,14 +36,24 @@
         "path": "mobile.xml",
         "type": "XML-Theme",
         "theme_constraints": {
+          "max_width": 699,
+          "min_width": 500
+        }
+      },
+      {
+        "name": "LuaTheme",
+        "path": "lua_theme.lua",
+        "type": "Lua-Theme",
+        "theme_constraints": {
           "max_width": 1200,
-          "min_width": 300
+          "min_width": 700
         }
       }
     ],
       "initially_loaded": [
         "Sample",
-        "Mobile"
+        "Mobile",
+        "LuaTheme"
       ]
   },
   "devices": {

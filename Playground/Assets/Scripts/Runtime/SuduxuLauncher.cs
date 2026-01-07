@@ -36,7 +36,7 @@ public class SuduxuLauncher : MonoBehaviour
     }
 
     // ===== Event Handlers =====
-    private void OnSensorData(ref SensorDataRaw data)
+    private void OnSensorData(ushort id, SensorDataRaw data)
     {
         Debug.Log($"Sensor azimuth: {data.az}");
     }
