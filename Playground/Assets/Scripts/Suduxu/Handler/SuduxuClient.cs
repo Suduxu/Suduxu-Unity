@@ -6,7 +6,11 @@ using Newtonsoft.Json.Linq;
 public class SuduxuClient
 {
     public event Action<ushort, Battery> OnBatteryChange;
-    public event Action<ushort, Network> OnNetworkChange; 
+    public event Action<ushort, Network> OnNetworkChange;
+
+    public event Action<ushort> OnHealthy;
+    public event Action<ushort> OnUnhealthy;
+    public event Action<ushort> OnTimeout;
 
     public ushort Id { get; private set; }
 
@@ -23,7 +27,7 @@ public class SuduxuClient
 
     public SuduxuClient Broadcast()
     {
-        Id = 0;
+        Id = SuduxuId.BroadcastId;
         return this;
     }
 
@@ -92,6 +96,13 @@ public class SuduxuClient
 
     public void HandleState(EventObject evt)
     {
+        ushort id = evt.value["id"]!.ToObject<ushort>();
+
+        if (id != Id && Id != 0)
+        {
+            return;
+        }
+
         switch (evt.kind)
         {
             case 0:
@@ -105,6 +116,29 @@ public class SuduxuClient
                         evt.value["id"]!.ToObject<ushort>(),
                         evt.value["network"]!.ToObject<Network>()
                     );
+                break;
+        }
+    }
+
+    public void HandleHealth(EventObject evt)
+    {
+        ushort id = evt.value["id"]!.ToObject<ushort>();
+
+        if (id != Id && Id != 0)
+        {
+            return;
+        }
+
+        switch (evt.kind)
+        {
+            case 0:
+                OnHealthy?.Invoke(id);
+                break;
+            case 1:
+                OnUnhealthy?.Invoke(id);
+                break;
+            case 2:
+                OnTimeout?.Invoke(id);
                 break;
         }
     }

@@ -20,7 +20,7 @@ public class SuduxuFrameRate : MonoBehaviour
             Debug.Log(log);
         };
 
-        suduxu.Input.OnSensorData += (ref SensorDataRaw sensorData) =>
+        suduxu.Input.OnSensorData += (ushort id, ref SensorDataRaw sensorData) =>
         {
             Debug.Log(sensorData);
 

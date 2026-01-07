@@ -7,7 +7,7 @@ public class SuduxuInput
     public ushort Id { get; private set; }
 
     // Sensor
-    public delegate void SensorDataEvent(ref SensorDataRaw data);
+    public delegate void SensorDataEvent(ushort id, ref SensorDataRaw data);
     public event SensorDataEvent OnSensorData;
 
     // UDP
@@ -29,15 +29,17 @@ public class SuduxuInput
 
     public SuduxuInput Broadcast()
     {
-        Id = 0;
+        Id = SuduxuId.BroadcastId;
         return this;
     }
 
-    public void OnSensorEvent(ref SensorDataRaw data)
+    public void OnSensorEvent(IntPtr sensorDataPtr)
     {
-        if (data.id == Id)
+        var data = Marshal.PtrToStructure<SensorDataRaw>(sensorDataPtr);
+
+        if (data.id == Id || Id == SuduxuId.BroadcastId)
         {
-            OnSensorData?.Invoke(ref data);
+            MainThreadDispatcher.Enqueue(() => OnSensorData?.Invoke(data));
         }
     }
 
