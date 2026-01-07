@@ -21,5 +21,10 @@ public class SuduxuEventTest : MonoBehaviour
             Debug.Log(
                 $"Client with {id} has {battery.level}% and is {(battery.chargingStatus != ChargingStatus.Charging ? "not" : "")} charging");
         };
+
+        suduxu.Input.Broadcast().OnJoystickData += (id, data) =>
+        {
+            Debug.Log($"Client with id {id} submitted data: {data}");
+        };
     }
 }

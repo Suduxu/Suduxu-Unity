@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 public class SuduxuInput
 {
@@ -23,6 +24,12 @@ public class SuduxuInput
     public SuduxuInput For(ushort id)
     {
         Id = id;
+        return this;
+    }
+
+    public SuduxuInput Broadcast()
+    {
+        Id = 0;
         return this;
     }
 
