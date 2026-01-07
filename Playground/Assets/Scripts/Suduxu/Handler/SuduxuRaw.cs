@@ -63,11 +63,10 @@ public class SuduxuRaw
     // ------------------------------------------------------------------------------
     // ----------------------------------- Sensor Event -----------------------------
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void SensorEventCallback(ref SensorDataRaw data);
+    public delegate void SensorEventCallback(IntPtr sensorData);
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void register_sensor_event_callback(SensorEventCallback eventCallback);
-
 
     // ----------------------------------- Event ------------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]

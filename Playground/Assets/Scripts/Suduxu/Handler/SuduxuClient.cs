@@ -27,7 +27,7 @@ public class SuduxuClient
 
     public SuduxuClient Broadcast()
     {
-        Id = 0;
+        Id = SuduxuId.BroadcastId;
         return this;
     }
 

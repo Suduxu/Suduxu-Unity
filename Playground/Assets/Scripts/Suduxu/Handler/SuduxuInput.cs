@@ -1,6 +1,3 @@
-using System;
-using Newtonsoft.Json.Linq;
-
 public class SuduxuInput
 {
     public ushort Id { get; private set; }
@@ -26,11 +23,19 @@ public class SuduxuInput
         return this;
     }
 
-    public void OnSensorEvent(ref SensorDataRaw data)
+    public SuduxuInput Broadcast()
     {
-        if (data.id == Id || Id == 0)
+        Id = SuduxuId.BroadcastId;
+        return this;
+    }
+
+    public void OnSensorEvent(IntPtr sensorDataPtr)
+    {
+        var data = Marshal.PtrToStructure<SensorDataRaw>(sensorDataPtr);
+
+        if (data.id == Id || Id == SuduxuId.BroadcastId)
         {
-            OnSensorData?.Invoke(data.id, ref data);
+            MainThreadDispatcher.Enqueue(() => OnSensorData?.Invoke(data));
         }
     }
 
