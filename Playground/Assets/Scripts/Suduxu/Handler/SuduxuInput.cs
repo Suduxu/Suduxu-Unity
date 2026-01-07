@@ -1,3 +1,7 @@
+using System;
+using Newtonsoft.Json.Linq;
+using UnityEngine;
+
 public class SuduxuInput
 {
     public ushort Id { get; private set; }
