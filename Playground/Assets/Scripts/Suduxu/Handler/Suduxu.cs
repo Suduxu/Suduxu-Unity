@@ -21,7 +21,7 @@ public class Suduxu : MonoBehaviour
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
 
-    JsonSerializerSettings settings = new JsonSerializerSettings
+    JsonSerializerSettings settings = new()
     {
         ContractResolver = new DefaultContractResolver
         {
