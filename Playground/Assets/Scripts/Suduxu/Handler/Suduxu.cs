@@ -56,7 +56,7 @@ public class Suduxu : MonoBehaviour
 
     private void Awake()
     {
-        Input = new SuduxuInput(defaultId);
+        Input = new SuduxuInput(defaultId, GetConfig());
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
         Log = new SuduxuLog();

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEngine;
+
 public class SuduxuConfig
 {
     public Server server;
@@ -7,6 +9,7 @@ public class SuduxuConfig
     public Security security;
     public FileSharing fileSharing;
     public Devices devices;
+    public ScreenCapture screenCapture;
     public Sensors sensors;
     public Developer developer;
     public HealthCheck healthCheck;
@@ -52,6 +55,13 @@ public class Devices
     public ushort? maxDevices;
     public List<Os> allowedDeviceTypes;
     public ushort initialFrameRate;
+}
+
+public class ScreenCapture
+{
+    public bool enabled;
+    public bool captureOnServer;
+    [CanBeNull] public string captureDirectory;
 }
 
 public class Sensors

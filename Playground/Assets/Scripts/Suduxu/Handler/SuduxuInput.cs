@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 public class SuduxuInput
 {
     public ushort Id { get; private set; }
+    private readonly SuduxuConfig _config;
 
     // Sensor
     public delegate void SensorDataEvent(ushort id, SensorDataRaw data);
@@ -16,9 +17,10 @@ public class SuduxuInput
     public event Action<ushort, JoystickData> OnJoystickData;
     public event Action<ushort, SuduxuPath> OnScreenshot;
 
-    public SuduxuInput(ushort id)
+    public SuduxuInput(ushort id, SuduxuConfig config)
     {
         Id = id;
+        _config = config;
     }
 
     public SuduxuInput For(ushort id)
@@ -95,9 +97,13 @@ public class SuduxuInput
                     id,
                     path);
 
-                CoroutineDispatcher.Instance.Run(
-                    ScreenshotDispatcher.TakeScreenshotAndNotify(path.path, id)
-                );
+
+                if (_config.screenCapture.enabled)
+                {
+                    CoroutineDispatcher.Instance.Run(
+                        ScreenshotDispatcher.TakeScreenshotAndNotify(path.path, id)
+                    );
+                }
 
                 break;
         }
