@@ -1,6 +1,4 @@
 using System;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
 using System.Runtime.InteropServices;
 
 public class SuduxuInput
@@ -16,6 +14,7 @@ public class SuduxuInput
     public event Action OnUdpStop;
     public event Action<ushort, ButtonInput> OnButtonInput;
     public event Action<ushort, JoystickData> OnJoystickData;
+    public event Action<ushort, SuduxuPath> OnScreenshot;
 
     public SuduxuInput(ushort id)
     {
@@ -46,6 +45,8 @@ public class SuduxuInput
 
     public void HandleUdp(EventObject evt)
     {
+        ushort id;
+
         switch (evt.kind)
         {
             case 0:
@@ -53,8 +54,15 @@ public class SuduxuInput
                 break;
 
             case 1:
+                id = evt.value["id"]!.ToObject<ushort>();
+
+                if (id != Id && Id != 0)
+                {
+                    return;
+                }
+
                 OnButtonInput?.Invoke(
-                    evt.value["id"]!.ToObject<ushort>(),
+                    id,
                     evt.value["input"]!.ToObject<ButtonInput>());
                 break;
 
@@ -63,9 +71,34 @@ public class SuduxuInput
                 break;
 
             case 3:
+                id = evt.value["id"]!.ToObject<ushort>();
+
+                if (id != Id && Id != 0)
+                {
+                    return;
+                }
+
                 OnJoystickData?.Invoke(
-                    evt.value["id"]!.ToObject<ushort>(),
+                    id,
                     evt.value["input"]!.ToObject<JoystickData>());
+                break;
+            case 4:
+                id = evt.value["id"]!.ToObject<ushort>();
+                SuduxuPath path = evt.value["path"]!.ToObject<SuduxuPath>();
+
+                if (id != Id && Id != 0)
+                {
+                    return;
+                }
+
+                OnScreenshot?.Invoke(
+                    id,
+                    path);
+
+                CoroutineDispatcher.Instance.Run(
+                    ScreenshotDispatcher.TakeScreenshotAndNotify(path.path, id)
+                );
+
                 break;
         }
     }

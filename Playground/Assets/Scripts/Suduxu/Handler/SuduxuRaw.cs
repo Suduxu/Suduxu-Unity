@@ -67,11 +67,17 @@ public class SuduxuRaw
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void register_sensor_event_callback(SensorEventCallback eventCallback);
-
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
     // ----------------------------------- Event ------------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void register_event_callback(EventCallback eventCallback);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void EventCallback(IntPtr ptr);
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    // --------------------------------- Screenshot ---------------------------------
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void notify_screenshot(string path, ushort id);
 }
