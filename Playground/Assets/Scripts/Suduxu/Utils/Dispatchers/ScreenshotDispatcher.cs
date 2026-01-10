@@ -1,3 +1,5 @@
+using System.Collections;
+
 public class ScreenshotDispatcher
 {
     public static IEnumerator TakeScreenshotAndNotify(string path, ushort id)
