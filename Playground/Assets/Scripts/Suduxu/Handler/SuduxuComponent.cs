@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SuduxuComponent : MonoBehaviour
@@ -15,10 +14,7 @@ public class SuduxuComponent : MonoBehaviour
             suduxu.Launch();
         }
 
-        suduxu.Log.OnLog += log =>
-        {
-            Debug.Log(log);
-        };
+        suduxu.Log.OnLog += log => { Debug.Log(log); };
     }
 
     private void OnDestroy()

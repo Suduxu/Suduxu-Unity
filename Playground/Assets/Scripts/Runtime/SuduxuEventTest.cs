@@ -18,6 +18,11 @@ public class SuduxuEventTest : MonoBehaviour
             instance = Instantiate(prefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         };
 
+        suduxu.Server.OnClientDisconnected += id =>
+        {
+            Debug.Log("Disconnected");
+        };
+
         
         suduxu.Client.OnBatteryChange += (id, battery) =>
         {
@@ -48,6 +53,8 @@ public class SuduxuEventTest : MonoBehaviour
 
             Debug.Log(sensorData);
 
+            Debug.Log(instance);
+
             instance.transform.rotation = unityQuat;
         };
     }
@@ -56,7 +63,7 @@ public class SuduxuEventTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            suduxu.Client.For(1).SendSensorData(true);
+            SuduxuRaw.debug_unity_path();
         }
     }
 }

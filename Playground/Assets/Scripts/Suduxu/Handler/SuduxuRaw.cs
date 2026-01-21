@@ -80,4 +80,7 @@ public class SuduxuRaw
     // --------------------------------- Screenshot ---------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void notify_screenshot(string path, ushort id);
+
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void debug_unity_path();
 }
