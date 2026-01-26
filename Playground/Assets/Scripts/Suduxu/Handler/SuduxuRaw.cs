@@ -19,6 +19,9 @@ public class SuduxuRaw
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void stop_suduxu();
 
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void determine_mode();
+
     // ---------------------------------  Clients  ----------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern IntPtr find_all_clients();
