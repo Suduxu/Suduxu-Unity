@@ -13,21 +13,7 @@ public class SuduxuEventTest : MonoBehaviour
     {
         suduxu.Server.OnClientConnected += id =>
         {
-            Debug.Log("Call");
-
             instance = Instantiate(prefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
-        };
-
-        
-        suduxu.Client.OnBatteryChange += (id, battery) =>
-        {
-            Debug.Log(
-                $"Client with {id} has {battery.level}% and is {(battery.chargingStatus != ChargingStatus.Charging ? "not" : "")} charging");
-        };
-
-        suduxu.Input.Broadcast().OnJoystickData += (id, data) =>
-        {
-            Debug.Log($"Client with id {id} submitted data: {data}");
         };
 
         suduxu.Input.For(1).OnSensorData += (id, sensorData)=>
@@ -48,6 +34,8 @@ public class SuduxuEventTest : MonoBehaviour
 
             Debug.Log(sensorData);
 
+            Debug.Log(instance);
+
             instance.transform.rotation = unityQuat;
         };
     }
@@ -56,7 +44,7 @@ public class SuduxuEventTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            suduxu.Client.For(1).SendSensorData(true);
+            SuduxuRaw.debug_unity_path();
         }
     }
 }

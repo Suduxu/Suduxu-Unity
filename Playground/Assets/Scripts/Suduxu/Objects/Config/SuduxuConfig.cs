@@ -1,5 +1,7 @@
-using System.Collections.Generic;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class SuduxuConfig
@@ -37,7 +39,7 @@ public class Logging
 
 public class Security
 {
-    public bool usePassword;
+    public bool enabled;
     public uint? password;
 }
 
@@ -77,6 +79,7 @@ public class Sensors
 
 public class Developer
 {
+    public bool preferCli;
     public bool allowMockedSensors;
     public bool allowMockedButtons;
 }
@@ -108,10 +111,14 @@ public class SharedFile
     [CanBeNull] public ThemeConstraints themeConstraints;
 }
 
+[JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
 public enum SharedFileType
 {
     Audio,
+    [EnumMember(Value = "Lua-Theme")]
     LuaTheme,
+
+    [EnumMember(Value = "XML-Theme")]
     XMLTheme
 }
 

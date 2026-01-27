@@ -56,6 +56,8 @@ public class Suduxu : MonoBehaviour
 
     private void Awake()
     {
+        SuduxuRaw.determine_mode();
+
         Input = new SuduxuInput(defaultId, GetConfig());
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
@@ -86,6 +88,8 @@ public class Suduxu : MonoBehaviour
         if (IsRunning())
             throw new SuduxuException("Suduxu is already running.");
 
+        RegisterCallbacks();
+
         SuduxuRaw.serverThread = new Thread(() =>
         {
             SuduxuRaw.start_suduxu();
@@ -95,8 +99,6 @@ public class Suduxu : MonoBehaviour
         };
 
         SuduxuRaw.serverThread.Start();
-
-        RegisterCallbacks();
     }
 
     public void Stop()
