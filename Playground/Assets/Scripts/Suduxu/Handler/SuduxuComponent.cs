@@ -27,8 +27,6 @@ public class SuduxuComponent : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Tick called");
-
         suduxu.Input.Tick(Time.deltaTime);
     }
 }
