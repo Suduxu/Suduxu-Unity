@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Injectable]
 public class Suduxu : MonoBehaviour
@@ -12,11 +13,15 @@ public class Suduxu : MonoBehaviour
     [SerializeField]
     private ushort defaultId = 0;
 
+    [SerializeField] 
+    public RawImage qrUiElement;
+
     public ushort DefaultId => defaultId;
     public SuduxuInput Input { get; private set; }
     public SuduxuClient Client { get; private set; }
     public SuduxuServer Server { get; private set; }
     public SuduxuLog Log { get; private set; }
+    public SuduxuQr Qr { get; private set; }
 
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
@@ -62,6 +67,7 @@ public class Suduxu : MonoBehaviour
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
         Log = new SuduxuLog();
+        Qr = new SuduxuQr(qrUiElement);
     }
 
     private SuduxuConfig GetConfig()

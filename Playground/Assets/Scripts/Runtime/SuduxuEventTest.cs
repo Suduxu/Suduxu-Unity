@@ -42,9 +42,9 @@ public class SuduxuEventTest : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            SuduxuRaw.debug_unity_path();
+            suduxu.Qr.RefreshQrCode();
         }
     }
 }

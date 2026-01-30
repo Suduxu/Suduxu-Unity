@@ -83,4 +83,12 @@ public class SuduxuRaw
     // --------------------------------- Screenshot ---------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void notify_screenshot(string path, ushort id);
+
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    // ------------------------------------- QR -------------------------------------
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern QrResult get_qr_code_rendered();
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void free_qr_buffer(IntPtr ptr, uint size);
 }
