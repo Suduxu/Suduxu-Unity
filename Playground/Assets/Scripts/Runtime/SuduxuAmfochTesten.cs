@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SuduxuAmfochTesten : MonoBehaviour
@@ -11,7 +10,15 @@ public class SuduxuAmfochTesten : MonoBehaviour
     {
         suduxu.Server.OnClientConnected += id =>
         {
-            this.id = id;
+            if (this.id == 9999)
+            {
+                this.id = id;
+            }
+        };
+
+        suduxu.Input.OnButtonInput += (_, input) =>
+        {
+            Debug.Log($"Input parsed: {input}");
         };
     }
 
@@ -19,7 +26,7 @@ public class SuduxuAmfochTesten : MonoBehaviour
     {
         if (suduxu.Input.For(id).GetButtonDown(ButtonInputType.A))
         {
-
+            suduxu.Client.For(id).Vibrate(1500, VibrationStrength.Heavy, VibrationType.Custom);
         }
 
         if (suduxu.Input.For(id).GetButton(ButtonInputType.A))

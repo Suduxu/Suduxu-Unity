@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -68,6 +69,11 @@ public class Suduxu : MonoBehaviour
         Server = new SuduxuServer();
         Log = new SuduxuLog();
         Qr = new SuduxuQr(qrUiElement);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(RefreshQr(100));
     }
 
     private SuduxuConfig GetConfig()
@@ -202,5 +208,11 @@ public class Suduxu : MonoBehaviour
         {
             SuduxuRaw.free(ptr);
         }
+    }
+
+    private IEnumerator RefreshQr(float millis)
+    {
+        yield return new WaitForSecondsRealtime(millis / 1000.0f);
+        Qr.RefreshQrCode();
     }
 }

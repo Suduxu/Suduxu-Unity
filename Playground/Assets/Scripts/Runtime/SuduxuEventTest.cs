@@ -34,8 +34,6 @@ public class SuduxuEventTest : MonoBehaviour
 
             Debug.Log(sensorData);
 
-            Debug.Log(instance);
-
             instance.transform.rotation = unityQuat;
         };
     }
