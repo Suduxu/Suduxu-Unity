@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SuduxuEventTest : MonoBehaviour
@@ -32,8 +31,6 @@ public class SuduxuEventTest : MonoBehaviour
                 androidQuat.w
             );
 
-            Debug.Log(sensorData);
-
             instance.transform.rotation = unityQuat;
         };
     }
@@ -43,6 +40,11 @@ public class SuduxuEventTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             suduxu.Qr.RefreshQrCode();
+        }
+
+        if (suduxu.Input.For(1).GetButtonDown(ButtonInputType.A))
+        {
+            suduxu.Client.For(1).Vibrate(500, VibrationStrength.Heavy, VibrationType.Custom);
         }
     }
 }
