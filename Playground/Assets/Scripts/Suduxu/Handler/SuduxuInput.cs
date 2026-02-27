@@ -109,6 +109,12 @@ public class SuduxuInput
         }
     }
 
+    public bool GetButtonReleased(ButtonInputType type)
+    {
+        return SuduxuRaw.get_button_in_state(Id, type, ButtonInputState.Up) ||
+               SuduxuRaw.get_button_in_state(Id, type, ButtonInputState.Cancel);
+    }
+
     public bool GetButtonDown(ButtonInputType type)
     {
         return SuduxuRaw.get_button_in_state(Id, type, ButtonInputState.Down);
