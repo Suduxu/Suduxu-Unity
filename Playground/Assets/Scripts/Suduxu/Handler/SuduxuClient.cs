@@ -41,9 +41,9 @@ public class SuduxuClient
             ptr = Marshal.StringToHGlobalAnsi(json);
 
             if (Id == 0)
-                SuduxuRaw.broadcast(ptr);
+                SuduxuRaw.broadcast(ptr).ToFFIStatus().ThrowIfException();
             else
-                SuduxuRaw.unicast(Id, ptr);
+                SuduxuRaw.unicast(Id, ptr).ToFFIStatus().ThrowIfException();
         }
         finally
         {

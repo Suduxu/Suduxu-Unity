@@ -62,8 +62,6 @@ public class Suduxu : MonoBehaviour
 
     private void Awake()
     {
-        SuduxuRaw.determine_mode();
-
         Input = new SuduxuInput(defaultId, GetConfig());
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
@@ -97,14 +95,11 @@ public class Suduxu : MonoBehaviour
 
     public void Launch()
     {
-        if (IsRunning())
-            throw new SuduxuException("Suduxu is already running.");
-
         RegisterCallbacks();
 
         SuduxuRaw.serverThread = new Thread(() =>
         {
-            SuduxuRaw.start_suduxu();
+            SuduxuRaw.start_suduxu().ToFFIStatus().ThrowIfException();
         })
         {
             IsBackground = true
@@ -115,10 +110,7 @@ public class Suduxu : MonoBehaviour
 
     public void Stop()
     {
-        if (!IsRunning())
-            throw new SuduxuException("Suduxu is not running.");
-
-        SuduxuRaw.stop_suduxu();
+        SuduxuRaw.stop_suduxu().ToFFIStatus().ThrowIfException();
 
         if (SuduxuRaw.serverThread != null && SuduxuRaw.serverThread.IsAlive)
         {
@@ -152,12 +144,12 @@ public class Suduxu : MonoBehaviour
 
     public void DisconnectAll()
     {
-        SuduxuRaw.disconnect_all();
+        SuduxuRaw.disconnect_all().ToFFIStatus().ThrowIfException();
     }
 
     public void DisconnectClient(ushort id)
     {
-        SuduxuRaw.disconnect_client(id);
+        SuduxuRaw.disconnect_client(id).ToFFIStatus().ThrowIfException();
     }
 
     private void _OnEvent(IntPtr ptr)
