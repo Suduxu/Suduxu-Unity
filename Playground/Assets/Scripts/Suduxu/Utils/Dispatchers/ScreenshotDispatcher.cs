@@ -10,8 +10,6 @@ public class ScreenshotDispatcher
         while (!System.IO.File.Exists(path))
             yield return null;
 
-        Debug.Log(path);
-
         SuduxuRaw.notify_screenshot(path, id).ToFFIStatus().ThrowIfException();
     }
 }

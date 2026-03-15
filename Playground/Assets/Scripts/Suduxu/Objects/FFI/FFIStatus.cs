@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public enum FFIStatus : int
 {
     Success = 0,
