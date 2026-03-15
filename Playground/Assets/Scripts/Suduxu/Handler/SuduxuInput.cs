@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 public class SuduxuInput
 {
@@ -15,7 +16,7 @@ public class SuduxuInput
     public event Action OnUdpStop;
     public event Action<ushort, ButtonInput> OnButtonInput;
     public event Action<ushort, JoystickData> OnJoystickData;
-    public event Action<ushort, SuduxuPath> OnScreenshot;
+    public event Action<ushort, string> OnScreenshot;
 
     public SuduxuInput(ushort id, SuduxuConfig config)
     {
@@ -86,7 +87,7 @@ public class SuduxuInput
                 break;
             case 4:
                 id = evt.value["id"]!.ToObject<ushort>();
-                SuduxuPath path = evt.value["path"]!.ToObject<SuduxuPath>();
+                string path = evt.value["path"]!.ToObject<string>();
 
                 if (id != Id && Id != 0)
                 {
@@ -97,11 +98,13 @@ public class SuduxuInput
                     id,
                     path);
 
+                Debug.Log(_config.screenCapture.enabled);
+
 
                 if (_config.screenCapture.enabled)
                 {
                     CoroutineDispatcher.Instance.Run(
-                        ScreenshotDispatcher.TakeScreenshotAndNotify(path.path, id)
+                        ScreenshotDispatcher.TakeScreenshotAndNotify(path, id)
                     );
                 }
 

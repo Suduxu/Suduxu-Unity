@@ -11,16 +11,15 @@ public class SuduxuRaw
     // ------------------------------------------------------------------------------
     // ----------------------------------- Server -----------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void start_suduxu();
+    public static extern int start_suduxu();
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static extern bool is_running();
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void stop_suduxu();
+    public static extern int stop_suduxu();
 
-    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void determine_mode();
 
     // ---------------------------------  Clients  ----------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
@@ -30,25 +29,28 @@ public class SuduxuRaw
     public static extern IntPtr find_client_by_id(ushort id);
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void broadcast(IntPtr ptr);
+    public static extern int broadcast(IntPtr ptr);
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void unicast(ushort id, IntPtr ptr);
+    public static extern int unicast(ushort id, IntPtr ptr);
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void disconnect_client(ushort id);
+    public static extern int disconnect_client(ushort id);
 
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void disconnect_all();
+    public static extern int disconnect_all();
 
     // ----------------------------------- State -----------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.U1)]
+
     public static extern bool get_button_in_state(ushort id, ButtonInputType type, ButtonInputState state);
 
     // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
     // --------------------------------- Game Loop ----------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static extern bool tick(float delta);
     // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
@@ -82,7 +84,7 @@ public class SuduxuRaw
     // ------------------------------------------------------------------------------
     // --------------------------------- Screenshot ---------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void notify_screenshot(string path, ushort id);
+    public static extern int notify_screenshot(string path, ushort id);
 
     // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------

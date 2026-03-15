@@ -15,11 +15,6 @@ public class SuduxuAmfochTesten : MonoBehaviour
                 this.id = id;
             }
         };
-
-        suduxu.Input.OnButtonInput += (_, input) =>
-        {
-            Debug.Log($"Input parsed: {input}");
-        };
     }
 
     private void Update()

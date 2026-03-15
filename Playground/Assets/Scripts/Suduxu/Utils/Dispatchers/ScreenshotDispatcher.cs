@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 
 public class ScreenshotDispatcher
 {
@@ -9,6 +10,8 @@ public class ScreenshotDispatcher
         while (!System.IO.File.Exists(path))
             yield return null;
 
-        SuduxuRaw.notify_screenshot(path, id);
+        Debug.Log(path);
+
+        SuduxuRaw.notify_screenshot(path, id).ToFFIStatus().ThrowIfException();
     }
 }
