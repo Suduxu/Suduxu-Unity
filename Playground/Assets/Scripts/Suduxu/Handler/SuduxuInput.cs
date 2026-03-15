@@ -98,9 +98,6 @@ public class SuduxuInput
                     id,
                     path);
 
-                Debug.Log(_config.screenCapture.enabled);
-
-
                 if (_config.screenCapture.enabled)
                 {
                     CoroutineDispatcher.Instance.Run(
