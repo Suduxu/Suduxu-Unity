@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -25,14 +24,14 @@ public class Server
     public ushort? udpPort;
     public ushort? filePort;
     public ConnectionStrategy connectionStrategy;
-    [CanBeNull] public List<string> list;
+    public List<string> list;
     public RateLimit rateLimit;
 }
 
 public class Logging
 {
     public LogLevel debugLevel;
-    [CanBeNull] public string logFile;
+    public string logFile;
     public ulong? maxLogSize;
     public bool logToConsole;
 }
@@ -46,9 +45,9 @@ public class Security
 public class FileSharing
 {
     public bool enabled;
-    [CanBeNull] public string sharedDirectory;
-    [CanBeNull] public List<SharedFile> files;
-    [CanBeNull] public List<string> initiallyLoaded;
+    public string sharedDirectory;
+    public List<SharedFile> files;
+    public List<string> initiallyLoaded;
 }
 
 public class Devices
@@ -63,7 +62,7 @@ public class ScreenCapture
 {
     public bool enabled;
     public bool captureOnServer;
-    [CanBeNull] public string captureDirectory;
+    public string captureDirectory;
 }
 
 public class Sensors
@@ -108,7 +107,7 @@ public class SharedFile
     public string name;
     public string path;
     public SharedFileType type;
-    [CanBeNull] public ThemeConstraints themeConstraints;
+    public ThemeConstraints themeConstraints;
 }
 
 [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
