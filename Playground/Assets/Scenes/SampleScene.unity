@@ -217,58 +217,13 @@ RectTransform:
   m_Children:
   - {fileID: 1916078218}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &132684664
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 132684666}
-  - component: {fileID: 132684665}
-  m_Layer: 0
-  m_Name: SuduxuEventTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &132684665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132684664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421e4827f56a4b64996cbd53085089f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2786391874485042028, guid: 50706315f1a1056408ea3e5f900ab151, type: 3}
---- !u!4 &132684666
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132684664}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7772884, y: 2.0880318, z: 0.059528336}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &187553316
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +891,6 @@ GameObject:
   - component: {fileID: 1439759879}
   - component: {fileID: 1439759878}
   - component: {fileID: 1439759880}
-  - component: {fileID: 1439759881}
   m_Layer: 0
   m_Name: Suduxu Component
   m_TagString: Untagged
@@ -953,7 +907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439759875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575db4d58d945c34e9454dd084b0584f, type: 3}
+  m_Script: {fileID: 11500000, guid: 395d1c7d5bbc5bb4c8d5578d57cc8f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   launchOnStart: 1
@@ -971,7 +925,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1439759878
 MonoBehaviour:
@@ -982,7 +936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439759875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe2ce0579cac8044b81df2261dab6c1, type: 3}
+  m_Script: {fileID: 11500000, guid: e302091f9504595499dde3a380aa5669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1439759879
@@ -994,7 +948,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439759875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560fa008f0875aa4abfa3fe723dc40dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cb1b32bf73ff094e8e1d380853023d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultId: 0
@@ -1008,19 +962,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439759875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db7cfd7a6caf95438e752eba596e89d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1439759881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439759875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ce0e6ff9b0196443b130d7ea15d697d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b15369e29fda2949aa930bca28319ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1916078217
@@ -1140,7 +1082,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2085176360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b08c329b76871f243b4ec97ea4f10780, type: 3}
+  m_Script: {fileID: 11500000, guid: 262571ad98bdde6468ceb5351440bd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
@@ -1211,5 +1153,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

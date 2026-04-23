@@ -1,0 +1,14 @@
+{
+  "name": "com.suduxu.unity",
+  "version": "0.1.0",
+  "displayName": "Suduxu Unity SDK",
+  "description": "Unity SDK for connecting games to Suduxu mobile clients.",
+  "unity": "2021.3",
+  "author": {
+    "name": "Suduxu"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  }
+}
