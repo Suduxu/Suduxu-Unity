@@ -6,7 +6,7 @@ This folder is UPM-ready and can be installed from Git.
 
 Use **Add package from Git URL...** with:
 
-`https://github.com/Suduxu/Suduxu-Unity.git?path=/Playground/Assets/Suduxu`
+```https://github.com/Suduxu/Suduxu-Unity.git?path=/Playground/Assets/Suduxu```
 
 ## Setting up a scene with Suduxu
 
