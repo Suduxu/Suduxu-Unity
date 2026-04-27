@@ -11,6 +11,8 @@ using UnityEngine.UI;
 [Injectable]
 public class Suduxu : MonoBehaviour
 {
+    public static Suduxu Instance { get; private set; }
+
     [SerializeField]
     private ushort defaultId = 0;
 
@@ -62,6 +64,13 @@ public class Suduxu : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         Input = new SuduxuInput(defaultId, GetConfig());
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();

@@ -1082,7 +1082,7 @@ PrefabInstance:
     - target: {fileID: 345725553692257964, guid: bbff2ac6cb07f1c44a85d39ef1f4a425, type: 3}
       propertyPath: qrUiElement
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 573484584}
     - target: {fileID: 345725553692257966, guid: bbff2ac6cb07f1c44a85d39ef1f4a425, type: 3}
       propertyPath: m_RootOrder
       value: 3
