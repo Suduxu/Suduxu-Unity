@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 
 public class SuduxuClient
 {
+    private static readonly string SDX_PREFIX = "[SDX]:";
+
     public event Action<ushort, Battery> OnBatteryChange;
     public event Action<ushort, Network> OnNetworkChange;
 
@@ -55,7 +57,7 @@ public class SuduxuClient
     public void Vibrate(long duration, VibrationStrength strength, VibrationType type)
     {
         _Send(new Payload(
-            "Vibrate",
+            $"{SDX_PREFIX}Vibrate",
             JToken.FromObject(new VibrationData(duration, strength, type))
         ));
     }
@@ -63,7 +65,7 @@ public class SuduxuClient
     public void PlaySound(string name)
     {
         _Send(new Payload(
-            "PlaySound",
+            $"{SDX_PREFIX}PlaySound",
             JToken.FromObject(new PlaySound(name))
         ));
     }
@@ -71,7 +73,7 @@ public class SuduxuClient
     public void SendSensorData(bool enabled)
     {
         _Send(new Payload(
-            "SendSensorData",
+            $"{SDX_PREFIX}SendSensorData",
             JToken.FromObject(new SendSensorData(enabled))
         ));
     }
@@ -79,19 +81,17 @@ public class SuduxuClient
     public void SetFrameRate(ushort frameRate)
     {
         _Send(new Payload(
-            "SetFrameRate",
+            $"{SDX_PREFIX}SetFrameRate",
             JToken.FromObject(new FrameRate(frameRate))
         ));
     }
 
     public void Log(LogLevel level, string message, string title = null)
     {
-        var payload = new Payload(
-            "Log",
+        _Send(new Payload(
+            $"{SDX_PREFIX}Log",
             JToken.FromObject(new LogObject(level, message, title))
-        );
-
-        _Send(payload);
+        ));
     }
 
     public void HandleState(EventObject evt)
