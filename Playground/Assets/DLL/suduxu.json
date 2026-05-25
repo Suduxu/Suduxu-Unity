@@ -23,8 +23,8 @@
     "password": null
   },
   "file_sharing": {
-    "enabled": false,
-    "shared_directory": null,
+    "enabled": true,
+    "shared_directory": "files",
     "files": null,
     "initially_loaded": null
   },
@@ -42,9 +42,9 @@
     "initial_frame_rate": 60
   },
   "screen_capture": {
-    "enabled": false,
-    "capture_on_server": false,
-    "capture_directory": null
+    "enabled": true,
+    "capture_on_server": true,
+    "capture_directory": "captures"
   },
   "sensors": {
     "accelerometer": true,
@@ -56,7 +56,7 @@
     "light": false
   },
   "developer": {
-    "prefer_cli": false,
+    "prefer_cli": true,
     "allow_mocked_sensors": false,
     "allow_mocked_buttons": false
   },

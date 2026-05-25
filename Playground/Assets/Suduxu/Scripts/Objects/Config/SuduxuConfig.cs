@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using UnityEngine;
 
 public class SuduxuConfig
 {
@@ -14,6 +13,23 @@ public class SuduxuConfig
     public Sensors sensors;
     public Developer developer;
     public HealthCheck healthCheck;
+
+    private static SuduxuConfig instance = null;
+
+    public static SuduxuConfig Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new SuduxuConfig();
+            return instance;
+        }
+        
+        set
+        {
+            instance = value;
+        }
+    }
 }
 
 public class Server

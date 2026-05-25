@@ -5,7 +5,13 @@ using UnityEngine;
 public class SuduxuInput
 {
     public ushort Id { get; private set; }
-    private readonly SuduxuConfig _config;
+    private SuduxuConfig Config
+    {
+        get
+        {
+            return SuduxuConfig.Instance;
+        }
+    }
 
     // Sensor
     public delegate void SensorDataEvent(ushort id, SensorDataRaw data);
@@ -18,10 +24,9 @@ public class SuduxuInput
     public event Action<ushort, JoystickData> OnJoystickData;
     public event Action<ushort, string> OnScreenshot;
 
-    public SuduxuInput(ushort id, SuduxuConfig config)
+    public SuduxuInput(ushort id)
     {
         Id = id;
-        _config = config;
     }
 
     public SuduxuInput For(ushort id)
@@ -98,7 +103,7 @@ public class SuduxuInput
                     id,
                     path);
 
-                if (_config.screenCapture.enabled)
+                if (Config.screenCapture.enabled)
                 {
                     CoroutineDispatcher.Instance.Run(
                         ScreenshotDispatcher.TakeScreenshotAndNotify(path, id)

@@ -29,32 +29,10 @@ public class Suduxu : MonoBehaviour
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
 
-    JsonSerializerSettings settings = new()
-    {
-        ContractResolver = new DefaultContractResolver
-        {
-            NamingStrategy = new SnakeCaseNamingStrategy()
-        },
-        Converters =
-        {
-            new Newtonsoft.Json.Converters.StringEnumConverter()
-        },
-        NullValueHandling = NullValueHandling.Include,
-        MissingMemberHandling = MissingMemberHandling.Error,
-        DefaultValueHandling = DefaultValueHandling.Populate
-    };
-
-    private SuduxuConfig _config;
-
     public SuduxuConfig Config {
         get
         {
-            if (_config == null)
-            {
-                _config = GetConfig();
-            }
-
-            return _config;
+            return SuduxuConfig.Instance;
         }
     }
 
@@ -71,7 +49,7 @@ public class Suduxu : MonoBehaviour
         }
         Instance = this;
 
-        Input = new SuduxuInput(defaultId, GetConfig());
+        Input = new SuduxuInput(defaultId);
         Client = new SuduxuClient(defaultId);
         Server = new SuduxuServer();
         Log = new SuduxuLog();
@@ -81,11 +59,6 @@ public class Suduxu : MonoBehaviour
     private void Start()
     {
         StartCoroutine(RefreshQr(100));
-    }
-
-    private SuduxuConfig GetConfig()
-    {
-        return _ReadJson<SuduxuConfig>(SuduxuRaw.config, settings);
     }
 
     private AddressObject GetAddresses()
@@ -196,6 +169,7 @@ public class Suduxu : MonoBehaviour
         try
         {
             string json = Marshal.PtrToStringAnsi(ptr);
+
             if (settings == null)
             {
                 return JsonConvert.DeserializeObject<T>(json);
