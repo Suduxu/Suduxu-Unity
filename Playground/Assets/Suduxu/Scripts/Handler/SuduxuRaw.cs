@@ -63,7 +63,7 @@ public class SuduxuRaw
     // ------------------------------------------------------------------------------
     // ----------------------------------- Utils ------------------------------------
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
-    public static extern bool free(IntPtr data);
+    public static extern bool suduxu_free(IntPtr data);
     // ------------------------------------------------------------------------------
     // ------------------------------------------------------------------------------
     // ----------------------------------- Sensor Event -----------------------------
@@ -93,4 +93,10 @@ public class SuduxuRaw
     public static extern QrResult get_qr_code_rendered();
     [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
     public static extern void free_qr_buffer(IntPtr ptr, uint size);
+
+    // ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    // ----------------------------------- Version ----------------------------------
+    [DllImport("suduxu", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr version();
 }

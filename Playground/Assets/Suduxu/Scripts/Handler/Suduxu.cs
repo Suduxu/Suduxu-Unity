@@ -29,6 +29,21 @@ public class Suduxu : MonoBehaviour
     private static SuduxuRaw.EventCallback _eventCallback;
     private static SuduxuRaw.SensorEventCallback _sensorCallback;
 
+    JsonSerializerSettings settings = new()
+    {
+        ContractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new SnakeCaseNamingStrategy()
+        },
+        Converters =
+        {
+            new Newtonsoft.Json.Converters.StringEnumConverter()
+        },
+        NullValueHandling = NullValueHandling.Include,
+        MissingMemberHandling = MissingMemberHandling.Error,
+        DefaultValueHandling = DefaultValueHandling.Populate
+    };
+
     public SuduxuConfig Config {
         get
         {
@@ -39,6 +54,22 @@ public class Suduxu : MonoBehaviour
     public AddressObject Addresses => GetAddresses();
 
     public uint? Password => Config.security.password;
+
+    public string DllVersion()
+    {
+        IntPtr ptr = SuduxuRaw.version();
+        string version;
+
+        try
+        {
+            version = Marshal.PtrToStringAnsi(ptr);
+        } finally
+        {
+            SuduxuRaw.suduxu_free(ptr);
+        }
+
+        return version;
+    }
 
     private void Awake()
     {
@@ -59,6 +90,13 @@ public class Suduxu : MonoBehaviour
     private void Start()
     {
         StartCoroutine(RefreshQr(100));
+
+        StartCoroutine(LoadConfig(500));
+    }
+
+    private SuduxuConfig GetConfig()
+    {
+        return _ReadJson<SuduxuConfig>(SuduxuRaw.config, settings);
     }
 
     private AddressObject GetAddresses()
@@ -137,7 +175,7 @@ public class Suduxu : MonoBehaviour
     private void _OnEvent(IntPtr ptr)
     {
         string json = Marshal.PtrToStringAnsi(ptr);
-        SuduxuRaw.free(ptr);
+        SuduxuRaw.suduxu_free(ptr);
 
         EventObject evt = JsonConvert.DeserializeObject<EventObject>(json);
 
@@ -181,7 +219,7 @@ public class Suduxu : MonoBehaviour
         }
         finally
         {
-            SuduxuRaw.free(ptr);
+            SuduxuRaw.suduxu_free(ptr);
         }
     }
 
@@ -189,5 +227,11 @@ public class Suduxu : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(millis / 1000.0f);
         Qr.RefreshQrCode();
+    }
+
+    private IEnumerator LoadConfig(float millis)
+    {
+        yield return new WaitForSecondsRealtime(millis / 1000.0f);
+        SuduxuConfig.Instance = GetConfig();
     }
 }
