@@ -130,8 +130,8 @@ public class SharedFile
 public enum SharedFileType
 {
     Audio,
-    [EnumMember(Value = "Lua-Theme")]
-    LuaTheme,
+    [EnumMember(Value = "HTML-Theme")]
+    HTMLTheme,
 
     [EnumMember(Value = "XML-Theme")]
     XMLTheme

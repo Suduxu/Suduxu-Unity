@@ -32,6 +32,11 @@ public class PhoneInstance : MonoBehaviour
 
     private void Update()
     {
+        if (suduxu.Input.For(1).GetButtonDown(ButtonInputType.A))
+        {
+            Debug.Log("A Pressed");
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             suduxu.Client.For(id).SendSensorData(true);
