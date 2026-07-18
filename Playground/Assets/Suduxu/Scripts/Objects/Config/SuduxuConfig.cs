@@ -71,7 +71,7 @@ public class Devices
     public bool initiallySendSensorData;
     public ushort? maxDevices;
     public List<Os> allowedDeviceTypes;
-    public ushort initialFrameRate;
+    public ushort initialSensorTransmissionRate;
 }
 
 public class ScreenCapture

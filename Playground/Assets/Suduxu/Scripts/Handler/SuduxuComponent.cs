@@ -15,6 +15,11 @@ public class SuduxuComponent : MonoBehaviour
         }
 
         suduxu.Log.OnLog += log => { Debug.Log(log); };
+
+        suduxu.Server.OnClientConnected += id =>
+        {
+            suduxu.Client.For(id).PlaySound("Duxu");
+        };
     }
 
     private void OnDestroy()

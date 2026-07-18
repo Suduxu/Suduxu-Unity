@@ -212,16 +212,16 @@ public class SuduxuClient
     }
 
     /// <summary>
-    /// Sets the target frame rate of the client application.
+    /// Sets the target sensor transmission rate of the client application.
     /// </summary>
-    /// <param name="frameRate">
-    /// Desired frame rate in frames per second.
+    /// <param name="rate">
+    /// Desired sensor transmission rate in Hz.
     /// </param>
-    public void SetFrameRate(ushort frameRate)
+    public void SetSensorTransmissionRate(ushort rate)
     {
         _Send(new Payload(
-            $"{SDX_PREFIX}SetFrameRate",
-            JToken.FromObject(new FrameRate(frameRate))
+            $"{SDX_PREFIX}SetSensorTransmissionRate",
+            JToken.FromObject(new SensorTransmissionRate(rate))
         ));
     }
 
